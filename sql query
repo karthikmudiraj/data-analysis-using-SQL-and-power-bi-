@@ -1,0 +1,80 @@
+# creating sample tables(table1 and table2)  and inserting random values into the columns, finding out the insights of the below problem statement.
+
+# Problem statement: Which type of payment is used more.
+
+#creating a schema/database as sales.
+
+create database if not exists sales;
+
+#after cearting a database sales. using sales for creating tables.
+use sales; 
+     
+create table sales(    #creating a table1 as sales having columns of transaction_id, customer_id, product_id, customer_name, product_name, place and sales.
+trasaction_id int not null primary key auto_increment,    # transaction_id is unique and no null values so provided it has a primary key, not null, and auto increment( it will increment the column automatically.
+customer_id int not null,   # customer_id in int so only numerical values.
+product_id varchar(10),     # product_id in varchar with a limit of 10.
+customer_name int,
+product_name varchar(10),   # product_name in varchar with a limit of 10.
+place varchar(10),          # place in varchar with a limit of 10.
+sales decimal(10,2)         # sales in decimals having 2 numbers after the point.
+);
+alter table sales           # altered the table and adding a column (payment_type)
+add payment_type varchar(10) not null;
+alter table sales           # i have also modified the column from customer_name int to customer_name varchar
+modify customer_name varchar(10);
+insert into sales            # inserting values into the sales table.
+values(201,4,"Z","ammu","zz","delhi",10,"googlepay"),
+(202,5,"B","sudheer","xz","hyd",20,"googlepay"),
+(203,6,"C","yash","yz","assam",30,"phonepay"),
+(204,7,"C","rakshi","az","raipur",90,"phonepay"),
+(205,8,"C","aneesh","bz","medak",60,"phonepay"),
+(206,9,"C","pranay","cz","narsapur",70,"googlepay"),
+(207,10,"C","saikumar","dz","sangareddy",40,"googlepay"),
+(208,11,"C","yashwanth","ez","chandnagar",10,"googlepay"),
+(209,12,"C","vinay","fz","dispur",30,"phonepay"),
+(210,13,"C","vikas","gz","lingampaly",20,"COD");
+
+create table sales1(    #creating another table2 as sales1 having columns of transaction_id, customer_id, product_id, customer_name, product_name, place and sales.
+trasaction_id int not null primary key auto_increment,    # transaction_id is unique and no null values so provided it has a primary key, not null, and auto increment( it will increment the column automatically.
+customer_id int not null,   # customer_id in int so only numerical values.
+product_id varchar(10),     # product_id in varchar with a limit of 10.
+customer_name int,
+product_name varchar(10),   # product_name in varchar with a limit of 10.
+place varchar(10),          # place in varchar with a limit of 10.
+sales decimal(10,2)         # sales in decimals having 2 numbers after the point.
+);
+
+alter table sales1           # altered the table and adding a column (payment_type)
+add payment_type varchar(10) not null;
+
+alter table sales1           # i have also modified the column from customer_name int to customer_name varchar
+modify customer_name varchar(10);
+
+insert into sales1           # inserting valeues into the table sales1.
+values (211,14,"D","yash","yz","assam",30,"googlepay"),
+(212,15,"E","sai","kz","kerala",50,"phonepay"),
+(213,16,"f","gautham","kz","bdl",30,"phonepay"),
+(214,17,"g","pranav","lz","odf",40,"googlepay"),
+(215,18,"h","ram","rz","bhel",20,"COD"),
+(216,19,"i","rama","tz","drdo",10,"phonepay"),
+(217,20,"j","shanker","oz","srinagar",90,"googlepay"),
+(218,21,"k","hari","wz","himachal",60,"googlepay"),
+(219,22,"l","chaitra","pz","manali",70,"phonepay"),
+(220,23,"m","anjali","sz","jammu",80,"COD");
+
+select * from sales;
+select* from sales1;
+
+insert into sales  # this is done to join 2 tables. table2(sales1) into sales table.
+select * 
+from sales1;
+
+select * from sales;
+
+select payment_type, count(payment_type) as count1  # selecting payment_type and counting(payment_type) from sales table and making group of payment_type, making and order by count(payment_type) as count1 by descending order.
+from sales
+group by payment_type
+order by count1 desc;
+
+# this will show the results as googlepay is used more then phonepay and cod 
+# data visualization is done in power bi (bar chart and smart narrative.
